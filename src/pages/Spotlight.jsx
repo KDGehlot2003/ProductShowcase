@@ -17,7 +17,8 @@ const Spotlight = () => {
   const itemsPerPage = 12; // Adjust this value based on your requirements
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 5000 }); // Initial price range
   const [selectedCategory, setSelectedCategory] = useState(''); // State to manage selected category
-  const [selectedCompany, setSelectedCompany] = useState(''); // State to manage selected Company
+  const [selectedCompany, setSelectedCompany] = useState(''); // State to manage selected Company\
+  const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
 
   
   useEffect(() => {
@@ -48,9 +49,11 @@ const Spotlight = () => {
   let filteredData = data.filter(item => {
   const matchesCategory = selectedCategory ? item.category === selectedCategory : true;
   const matchesCompany = selectedCompany ? item.company === selectedCompany : true;
+  const matchesAvailability = !showOnlyAvailable || item.availability === 'yes' ? true : false;
   const matchesPrice = item.price >= selectedPriceRange.min && item.price <= selectedPriceRange.max;
-  return matchesCategory && matchesPrice && matchesCompany;
+  return matchesCategory && matchesPrice && matchesCompany && matchesAvailability;
 });
+
 
 // console.log('Unique Categories:', uniqueCategories);
 // console.log('Selected Category:', selectedCategory);
@@ -82,6 +85,11 @@ const Spotlight = () => {
   const handleCompanyChange = (company) => {
     setSelectedCompany(uniqueCompany[company]);
     setCurrentPage(1); // Reset page to 1 when category changes
+  };
+
+  const handleAvailabilityToggle = () => {
+    setShowOnlyAvailable(!showOnlyAvailable);
+    setCurrentPage(1); // Reset page to 1 when availability filter changes
   };
 
 
@@ -148,7 +156,14 @@ const Spotlight = () => {
 
       </div>
         <div className='flex justify-end mr-20'>
-        <Checkbox defaultSelected className='text-white'><p className='text-sm'>In Stock</p></Checkbox>
+        <Checkbox 
+        className='text-white'
+        onChange={handleAvailabilityToggle}
+        >
+          <p className='text-sm'>
+            In Stock
+          </p>
+        </Checkbox>
         </div>
       <div className='grid grid-cols-4 mx-20'>
       {currentItems && currentItems.length > 0 ? (
