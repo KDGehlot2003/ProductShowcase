@@ -1,35 +1,32 @@
 import React, { useState, useEffect }  from 'react'
 import {Card, CardHeader, CardBody,CardFooter, Image} from "@nextui-org/react";
 import MyCard from '../components/MyCard'
+import fetchData from '../data/Data'
 
+// console.log(data);
 
 
 const AllProdcts = () => {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-
-    useEffect( () => {
-        const fetchData = async () => {
-        try {
-            const response = await fetch('https://json-server.bytexl.app/products')
-            if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json()
-
-            setData(data)
-            setLoading(false)
-        } catch (error) {
-            setError(error)
-            setLoading(false)
-        }};
-        fetchData();
-    } , [])
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
     
+    useEffect(() => {
+        const getData = async () => {
+          const result = await fetchData();
+            if (result) {
+                setData(result);
+                setLoading(false);
+            } else {
+            setError('Failed to fetch data');
+            setLoading(false);
+            }
+        };
+        getData();
+    }, []);
+    
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <div className='grid grid-cols-4'>

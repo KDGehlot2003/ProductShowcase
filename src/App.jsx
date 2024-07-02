@@ -1,6 +1,6 @@
-import MyCard from './components/MyCard';
 import MyNavbar from "./components/MyNavbar";
 import AllProducts from "../src/pages/AllProdcts";
+import Spotlight from "./pages/Spotlight";
 
 function App() {
 
@@ -9,6 +9,7 @@ function App() {
     <>
     <MyNavbar />
     <AllProducts />
+    {/* <Spotlight /> */}
     </>
   )
 }
