@@ -19,6 +19,7 @@ const Spotlight = () => {
   const [selectedCategory, setSelectedCategory] = useState(''); // State to manage selected category
   const [selectedCompany, setSelectedCompany] = useState(''); // State to manage selected Company\
   const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   
   useEffect(() => {
@@ -50,16 +51,17 @@ const Spotlight = () => {
   const matchesCategory = selectedCategory ? item.category === selectedCategory : true;
   const matchesCompany = selectedCompany ? item.company === selectedCompany : true;
   const matchesAvailability = !showOnlyAvailable || item.availability === 'yes' ? true : false;
+  const matchesSearch = item.productName.toLowerCase().includes(searchQuery.toLowerCase()) || item.company.toLowerCase().includes(searchQuery.toLowerCase());
   const matchesPrice = item.price >= selectedPriceRange.min && item.price <= selectedPriceRange.max;
-  return matchesCategory && matchesPrice && matchesCompany && matchesAvailability;
+  return matchesCategory && matchesPrice && matchesCompany && matchesAvailability && matchesSearch;
 });
-
 
 // console.log('Unique Categories:', uniqueCategories);
 // console.log('Selected Category:', selectedCategory);
 // console.log('Selected Price Range:', selectedPriceRange);
 // console.log('Filtered Data Length:', filteredData.length);
-// console.log('Filtered Data:', filteredData);
+console.log('Filtered Data:', filteredData);
+console.log('searchQuery : ', searchQuery);
 
   // Calculate the items to be displayed for the current page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -93,8 +95,14 @@ const Spotlight = () => {
   };
 
 
+  const handleSearchChange = (query) => {
+    console.log('Search query:', query); // Debugging: Log the search query
+    setSearchQuery(query);
+    setCurrentPage(1); // Reset page to 1 when search query changes
+  };
+
   
-  const sortOptions = ["price", "rating", "discount"]
+  const sortOptions = ["Price", "Rating", "Discount"]
 
   return (
     <div className='my-10'>
@@ -133,7 +141,10 @@ const Spotlight = () => {
             />
         </div>
         <div className='col-start-6 col-end-10 text-center '>
-          <Search productList={uniqueProduct} />
+        <Search 
+          productList={uniqueProduct} 
+          onChange={handleSearchChange}
+        />
         </div>
         <div className='col-start-10 col-end-11 '>
         <PriceDropDown
