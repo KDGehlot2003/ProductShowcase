@@ -31,10 +31,10 @@ const MyNavbar = () => {
       </NavbarContent>
 
 
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="sm:hidden pr-3 ml-8 mr-2" justify="center">
         <NavbarBrand>
           <AcmeLogo />
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">Product ShowCase</p>
         </NavbarBrand>
       </NavbarContent>
 

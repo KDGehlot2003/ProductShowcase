@@ -36,7 +36,7 @@ const Spotlight = () => {
     getData();
   }, []);
   
-  if (loading) return <div className=' flex justify-center m-80'>
+  if (loading) return <div className=' flex justify-center md:m-80 mt-72'>
     <Spinner size="lg" />
   </div>;
   if (error) return <div>Error: {error}</div>;
@@ -106,7 +106,7 @@ console.log('searchQuery : ', searchQuery);
 
   return (
     <div className='my-10'>
-      <div className='grid grid-cols-12 gap-4 mx-36'>
+      <div className='md:grid md:grid-cols-12 gap-4 mx-36 hidden '>
         <div className='col-start-1 col-end-3 w-40'>
           <MySelect
           labelProp='Select a Category'
@@ -166,7 +166,7 @@ console.log('searchQuery : ', searchQuery);
         </div>     
 
       </div>
-        <div className='flex justify-end mr-20'>
+        <div className='md:flex md:justify-end md:mr-20 hidden'>
         <Checkbox 
         className='text-white'
         onChange={handleAvailabilityToggle}
@@ -176,7 +176,7 @@ console.log('searchQuery : ', searchQuery);
           </p>
         </Checkbox>
         </div>
-      <div className='grid grid-cols-4 mx-20'>
+      <div className='grid grid-cols-1 sm:mx-20 sm:grid-cols-4 ml-5'>
       {currentItems && currentItems.length > 0 ? (
           currentItems.map((item) => (
             <MyCard data={item} key={item.id} />
@@ -187,7 +187,7 @@ console.log('searchQuery : ', searchQuery);
           </div>
         )}
       </div>
-      <div className='flex justify-center mt-10'>
+      <div className='md:flex md:justify-center md:mt-10 ml-14'>
         <Pagination 
         total={totalPages} 
         initialPage={currentPage} 

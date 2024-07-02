@@ -16,7 +16,7 @@ const MyCard = ({data}) => {
 
     
   return (
-  <Card className="py-2 m-6 hover:scale-105">
+  <Card className="py-2 m-6 hover:scale-105 sm:w-72 w-max">
     <CardBody className="overflow-visible py-2 items-center">
       <Image
         alt="Card background"
