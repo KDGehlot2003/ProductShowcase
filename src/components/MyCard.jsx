@@ -3,7 +3,7 @@ import {Card, CardHeader, CardBody,CardFooter, Image} from "@nextui-org/react";
 
 
 
-const MyCard = ({data}) => {
+const MyCard = ({data , image = "https://nextui.org/images/hero-card-complete.jpeg"}) => {
 
   // const item = {
   //   company: 'Apple',
@@ -20,8 +20,8 @@ const MyCard = ({data}) => {
     <CardBody className="overflow-visible py-2 items-center">
       <Image
         alt="Card background"
-        className="object-cover rounded-xl"
-        src="https://nextui.org/images/hero-card-complete.jpeg"
+        className="object-cover rounded-xl w-72 h-48"
+        src={image}
         width={270}
       />
     </CardBody>

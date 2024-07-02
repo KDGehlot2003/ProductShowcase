@@ -7,6 +7,7 @@ import {Spinner} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import {Checkbox} from "@nextui-org/react";
 import PriceDropDown from '../components/PriceDropDown'
+import photos from '../data/Photos'
 
 
 const Spotlight = () => {
@@ -179,7 +180,11 @@ console.log('searchQuery : ', searchQuery);
       <div className='grid grid-cols-1 sm:mx-20 sm:grid-cols-4 ml-5'>
       {currentItems && currentItems.length > 0 ? (
           currentItems.map((item) => (
-            <MyCard data={item} key={item.id} />
+            <MyCard 
+              image={photos[Math.floor(Math.random() * photos.length)].urls.small} 
+              data={item} 
+              key={item.id} 
+            />
           ))
         ) : (
           <div className='col-span-4 text-center mt-20'>
