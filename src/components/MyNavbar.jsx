@@ -39,30 +39,25 @@ const MyNavbar = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4 ml-0 pl-0" justify="start">
-        <NavbarBrand className='mr-64 pr-3'>
+        <NavbarBrand className='mr-48 pr-3'>
           <AcmeLogo />
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">Product ShowCase</p>
         </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Features
+            All Products
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
           <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+            Spotlight
           </Link>
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent justify="end">
         <NavbarItem className=' w-20 h-12 flex'>
-            <Avatar 
+          <Avatar 
             isBordered color="primary" 
             src="https://i.pravatar.cc/150?u=a04258a2462d826712d" 
             className='w-8 h-8 mt-2 ml-5 '

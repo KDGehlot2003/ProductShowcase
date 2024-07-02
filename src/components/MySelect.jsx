@@ -1,17 +1,17 @@
 import React from 'react'
 import {Select, SelectItem} from "@nextui-org/react";
-import {animals} from "./data";
+// import {animals} from "./data";
 
-const MySelect = ({lableProp}) => {
+const MySelect = ({labelProp, liProp, value, onChange}) => {
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Select 
-        label={lableProp}
+        label={labelProp}
         className="max-w-xs animate-appearance-in" 
       >
-        {animals.map((animal) => (
-          <SelectItem key={animal.key}>
-            {animal.label}
+        {liProp.map((item) => (
+          <SelectItem key={item.key}>
+            {item.props.children}
           </SelectItem>
         ))}
       </Select>
