@@ -6,6 +6,8 @@ import MyCard from '../components/MyCard'
 import {Spinner} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import {Checkbox} from "@nextui-org/react";
+import PriceRangeFilter from '../components/PriceRangeFilter';
+import PriceDropDown from '../components/PriceDropDown'
 
 
 const Spotlight = () => {
@@ -13,7 +15,7 @@ const Spotlight = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // Adjust this value based on your requirements
+  const itemsPerPage = 12; // Adjust this value based on your requirements
   
   useEffect(() => {
       const getData = async () => {
@@ -54,7 +56,7 @@ const Spotlight = () => {
 
   return (
     <div className='my-10'>
-      <div className='grid grid-cols-12 gap-4 mx-40'>
+      <div className='grid grid-cols-12 gap-4 mx-36'>
         <div className='col-start-1 col-end-3 w-40'>
           <MySelect
           labelProp='Select a Category'
@@ -91,9 +93,12 @@ const Spotlight = () => {
         <div className='col-start-6 col-end-10 text-center '>
           <Search />
         </div>
-        <div className='col-start-10 col-end-12 w-full'>
+        <div className='col-start-10 col-end-11 '>
+          <PriceDropDown />
+        </div>
+        <div className='col-start-11 col-end-12 w-28 '>
           <MySelect 
-          labelProp='Sort By'
+          labelProp='SortBy'
           liProp={sortOptions.map((option, index) => (
             <option key={index}>
               {option}
@@ -101,11 +106,12 @@ const Spotlight = () => {
           ))
           }
           />
-        </div>                
-        <div className='col-start-12 w-28 mt-3'>
-          <Checkbox defaultSelected className='text-white'>In Stock</Checkbox>
-        </div>
+        </div>     
+
       </div>
+        <div className='flex justify-end mr-20'>
+        <Checkbox defaultSelected className='text-white'><p className='text-sm'>In Stock</p></Checkbox>
+        </div>
       <div className='grid grid-cols-4 mx-20'>
         {currentItems && currentItems.length>0 && currentItems.map((item) => (
             <MyCard data={item} key={item.id} />

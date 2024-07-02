@@ -8,7 +8,7 @@ const Search = () => {
     allowsCustomValue
     label="Search a Product" 
     variant="bordered"
-    className="max-w-xs animate-appearance-in" 
+    className="max-w-xs animate-appearance-in h-12" 
     defaultItems={animals}
   >
     {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
