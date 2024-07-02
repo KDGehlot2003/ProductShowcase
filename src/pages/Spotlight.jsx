@@ -6,7 +6,6 @@ import MyCard from '../components/MyCard'
 import {Spinner} from "@nextui-org/react";
 import {Pagination} from "@nextui-org/react";
 import {Checkbox} from "@nextui-org/react";
-import PriceRangeFilter from '../components/PriceRangeFilter';
 import PriceDropDown from '../components/PriceDropDown'
 
 
@@ -16,41 +15,53 @@ const Spotlight = () => {
   const [error, setError] = useState(null)
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12; // Adjust this value based on your requirements
+  const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100000 }); // Initial price range
+
   
   useEffect(() => {
-      const getData = async () => {
-        const result = await fetchData();
-          if (result) {
-              setData(result);
-              setLoading(false);
-          } else {
-          setError('Failed to fetch data');
-          setLoading(false);
-          }
-      };
-      getData();
+    const getData = async () => {
+      const result = await fetchData();
+      if (result) {
+        setData(result);
+        setLoading(false);
+      } else {
+        setError('Failed to fetch data');
+        setLoading(false);
+      }
+    };
+    getData();
   }, []);
   
   if (loading) return <div className=' flex justify-center m-80'>
     <Spinner size="lg" />
   </div>;
   if (error) return <div>Error: {error}</div>;
-
+  
   const uniqueCategories = [...new Set(data.map(item => item.category))];
   const uniqueCompany = [...new Set(data.map(item => item.company))];
   const uniqueRating = [...new Set(data.map(item => item.rating))];
-
+  const uniqueProduct = [...new Set(data.map(item => item.productName))];
+  
+  let filteredData = data.filter(item => {
+    return item.price >= selectedPriceRange.min && item.price <= selectedPriceRange.max;
+  });
   // Calculate the items to be displayed for the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   // Calculate the total number of pages
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  const handlePriceRangeChange = (min, max) => {
+    setSelectedPriceRange({ min, max });
+  };
+
+
   
   const sortOptions = ["price", "rating", "discount"]
 
@@ -91,10 +102,14 @@ const Spotlight = () => {
             />
         </div>
         <div className='col-start-6 col-end-10 text-center '>
-          <Search />
+          <Search productList={uniqueProduct} />
         </div>
         <div className='col-start-10 col-end-11 '>
-          <PriceDropDown />
+        <PriceDropDown
+            onChange={handlePriceRangeChange}
+            minPrice={0}
+            maxPrice={1000}
+          />
         </div>
         <div className='col-start-11 col-end-12 w-28 '>
           <MySelect 

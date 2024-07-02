@@ -1,17 +1,17 @@
 import React from 'react'
 import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
-import {animals} from "./data";
 
-const Search = () => {
+const Search = ({productList}) => {
+  console.log(productList);
   return (
     <Autocomplete 
     allowsCustomValue
     label="Search a Product" 
     variant="bordered"
     className="max-w-xs animate-appearance-in h-12" 
-    defaultItems={animals}
+    defaultItems={productList}
   >
-    {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+    {productList.map(item => <AutocompleteItem key={item}>{item}</AutocompleteItem>)}
   </Autocomplete>
   )
 }
