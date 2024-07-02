@@ -1,17 +1,14 @@
-import { Card } from "@nextui-org/react";
-import Test from "./components/Test";
 import MyCard from './components/MyCard';
+import MyNavbar from "./components/MyNavbar";
+import AllProducts from "../src/pages/AllProdcts";
 
 function App() {
 
 
   return (
     <>
-    <Test />
-    <div className="grid grid-cols-4">
-    <MyCard />
-    <MyCard />
-    </div>
+    <MyNavbar />
+    <AllProducts />
     </>
   )
 }
