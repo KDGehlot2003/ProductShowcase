@@ -15,7 +15,7 @@ const Spotlight = () => {
   const [error, setError] = useState(null)
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12; // Adjust this value based on your requirements
-  const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 100000 }); // Initial price range
+  const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 5000 }); // Initial price range
 
   
   useEffect(() => {
@@ -108,7 +108,7 @@ const Spotlight = () => {
         <PriceDropDown
             onChange={handlePriceRangeChange}
             minPrice={0}
-            maxPrice={1000}
+            maxPrice={5000}
           />
         </div>
         <div className='col-start-11 col-end-12 w-28 '>
