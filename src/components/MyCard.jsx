@@ -26,30 +26,16 @@ const MyCard = () => {
       fetchData();
   } , [])
 
-  const myData = JSON.parse(JSON.stringify(data));
-
-  console.log(myData[0]);
   
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   
 
-
-  const myData12 = {
-                  "availability": "yes",
-                  "category": "Phone",
-                  "company": "AMZ",
-                  "discount": 20,
-                  "id": 1,
-                  "price": 500,
-                  "productName": "Phone 1",
-                  "rating": 4.5
-                  }
     
   return (
     <>
-
-    <Card className="py-2 m-6">
+  {data && data.length>0 && data.map((item) => (
+  <Card className="py-2 m-6 hover:scale-105 ">
     <CardBody className="overflow-visible py-2 items-center">
       <Image
         alt="Card background"
@@ -59,32 +45,26 @@ const MyCard = () => {
       />
     </CardBody>
     <CardHeader className="pb-0 pt-2 px-4 block">
-    
-    {/* <h1 className='font-bold text-2xl'>{myData[0].productName}</h1> */}
 
-        {/* <div className='flex justify-between'>
-          <h4 className="font-semibold text-medium text-gray-400">{myData.company}</h4>
-          <p className=' '>{myData.rating}</p>
+        <div className='flex justify-between'>
+          <h4 className="font-semibold text-medium text-gray-400">{item.company}</h4>
+          <p className=' '>{item.rating}</p>
         </div>
-        <h1 className='font-bold text-2xl'>{myData.productName}</h1>
+        <h1 className='font-bold text-2xl'>{item.productName}</h1>
         <div className='flex'>
-          <p className=" text-lg mr-2">${myData.price}</p>
-          <p className="text-default-500 text-medium line-through mr-2">${myData.price/(1-(myData.discount)/100)}</p>
-          <p className="text-default-500 text-medium ">{myData.discount}% off</p>
+          <p className=" text-lg mr-2">${item.price}</p>
+          <p className="text-default-500 text-medium line-through mr-2">${(item.price/(1-(item.discount)/100)).toFixed(2)}</p>
+          <p className="text-default-500 text-medium ">{item.discount}% off</p>
         </div>
         {
-        myData.availability === 'yes' ? 
+        item.availability === 'yes' ? 
         <p className="text-green-500 text-medium text-end">In Stock</p> : 
         <p className="text-red-500 text-medium text-end">Out of Stock</p>
-        }  */}
+        } 
 
-
-      {/* <p className="text-tiny uppercase font-bold">Daily Mix</p> */}
-      {/* <small className="text-default-500">12 Tracks</small> */}
-      {/* <b>{myData.productName}</b> */}
-      {/* <p className="text-default-500">${myData.price}</p> */}
     </CardHeader>
   </Card>
+  ))}
   </>
   )
 }
