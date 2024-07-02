@@ -16,6 +16,8 @@ const Spotlight = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12; // Adjust this value based on your requirements
   const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 5000 }); // Initial price range
+  const [selectedCategory, setSelectedCategory] = useState(''); // State to manage selected category
+  const [selectedCompany, setSelectedCompany] = useState(''); // State to manage selected Company
 
   
   useEffect(() => {
@@ -42,9 +44,20 @@ const Spotlight = () => {
   const uniqueRating = [...new Set(data.map(item => item.rating))];
   const uniqueProduct = [...new Set(data.map(item => item.productName))];
   
+ // Filter data based on selected category and price range
   let filteredData = data.filter(item => {
-    return item.price >= selectedPriceRange.min && item.price <= selectedPriceRange.max;
-  });
+  const matchesCategory = selectedCategory ? item.category === selectedCategory : true;
+  const matchesCompany = selectedCompany ? item.company === selectedCompany : true;
+  const matchesPrice = item.price >= selectedPriceRange.min && item.price <= selectedPriceRange.max;
+  return matchesCategory && matchesPrice && matchesCompany;
+});
+
+// console.log('Unique Categories:', uniqueCategories);
+// console.log('Selected Category:', selectedCategory);
+// console.log('Selected Price Range:', selectedPriceRange);
+// console.log('Filtered Data Length:', filteredData.length);
+// console.log('Filtered Data:', filteredData);
+
   // Calculate the items to be displayed for the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -61,6 +74,16 @@ const Spotlight = () => {
     setSelectedPriceRange({ min, max });
   };
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(uniqueCategories[category]);
+    setCurrentPage(1); // Reset page to 1 when category changes
+  };
+
+  const handleCompanyChange = (company) => {
+    setSelectedCompany(uniqueCompany[company]);
+    setCurrentPage(1); // Reset page to 1 when category changes
+  };
+
 
   
   const sortOptions = ["price", "rating", "discount"]
@@ -75,8 +98,8 @@ const Spotlight = () => {
             <option key={index}>
               {category}
             </option>
-          ))
-          }
+            ))}
+            onChange={handleCategoryChange}
           />
         </div>
         <div className='col-start-3 col-end-5 w-40'>
@@ -86,8 +109,8 @@ const Spotlight = () => {
             <option key={index}>
               {company}
             </option>
-          ))
-          }
+            ))}
+          onChange={handleCompanyChange}
           />
         </div>
         <div className='col-start-5 col-end-6 w-20'>
@@ -97,8 +120,8 @@ const Spotlight = () => {
               <option key={index}>
                 {rating}
               </option>
-            ))
-            }
+              ))}
+            onChange={() => {}}
             />
         </div>
         <div className='col-start-6 col-end-10 text-center '>
@@ -118,8 +141,8 @@ const Spotlight = () => {
             <option key={index}>
               {option}
             </option>
-          ))
-          }
+            ))}
+          onChange={() => {}}
           />
         </div>     
 
@@ -128,9 +151,15 @@ const Spotlight = () => {
         <Checkbox defaultSelected className='text-white'><p className='text-sm'>In Stock</p></Checkbox>
         </div>
       <div className='grid grid-cols-4 mx-20'>
-        {currentItems && currentItems.length>0 && currentItems.map((item) => (
+      {currentItems && currentItems.length > 0 ? (
+          currentItems.map((item) => (
             <MyCard data={item} key={item.id} />
-        ))}
+          ))
+        ) : (
+          <div className='col-span-4 text-center mt-20'>
+            No products found for the selected category and price range.
+          </div>
+        )}
       </div>
       <div className='flex justify-center mt-10'>
         <Pagination 

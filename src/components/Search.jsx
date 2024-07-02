@@ -2,7 +2,6 @@ import React from 'react'
 import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
 
 const Search = ({productList}) => {
-  console.log(productList);
   return (
     <Autocomplete 
     allowsCustomValue
