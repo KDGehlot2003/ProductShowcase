@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react'
-import {Card, CardHeader, CardBody,CardFooter, Image} from "@nextui-org/react";
+import {Spinner} from "@nextui-org/react";
 import MyCard from '../components/MyCard'
 import fetchData from '../data/Data'
 
@@ -25,11 +25,13 @@ const AllProdcts = () => {
         getData();
     }, []);
     
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className='flex justify-center md:m-80 mt-72 '>
+        <Spinner size="lg" />
+    </div>;
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div className='grid grid-cols-4'>
+        <div className='grid grid-cols-1 sm:mx-10 sm:grid-cols-4 ml-5'>
 
     {data && data.length>0 && data.map((item) => (
         <MyCard data={item} key={item.id} />

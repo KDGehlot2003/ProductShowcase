@@ -36,12 +36,12 @@ const MyNavbar = () => {
           <p className="font-bold text-inherit">Product ShowCase</p>
         </NavbarBrand>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/">
             All Products
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="/spotlight" aria-current="page">
             Spotlight
           </Link>
         </NavbarItem>
@@ -69,7 +69,7 @@ const MyNavbar = () => {
               color={
                 index === 2 ? "warning" : index === menuItems.length - 1 ? "" : "foreground"
               }
-              href="#"
+              href="/"
               size="lg"
             >
               {item}
