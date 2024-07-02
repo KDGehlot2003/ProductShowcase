@@ -7,16 +7,8 @@ import {Avatar} from "@nextui-org/react";
 const MyNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    "All Products",
+    "Spotlight"
   ];
 
   return (
@@ -75,7 +67,7 @@ const MyNavbar = () => {
             <Link
               className="w-full"
               color={
-                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2 ? "warning" : index === menuItems.length - 1 ? "" : "foreground"
               }
               href="#"
               size="lg"
