@@ -7,7 +7,7 @@ const MySelect = ({lableProp}) => {
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Select 
         label={lableProp}
-        className="max-w-xs" 
+        className="max-w-xs animate-appearance-in" 
       >
         {animals.map((animal) => (
           <SelectItem key={animal.key}>

@@ -1,6 +1,8 @@
 import React from 'react'
 import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 import {AcmeLogo} from "./AcmeLogo.jsx";
+import {Avatar} from "@nextui-org/react";
+
 
 const MyNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -59,13 +61,16 @@ const MyNavbar = () => {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
-            Sign Up
-          </Button>
+        <NavbarItem className=' w-20 h-12 flex'>
+            <Avatar 
+            isBordered color="primary" 
+            src="https://i.pravatar.cc/150?u=a04258a2462d826712d" 
+            className='w-8 h-8 mt-2 ml-5 '
+            />
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
         </NavbarItem>
       </NavbarContent>
 
